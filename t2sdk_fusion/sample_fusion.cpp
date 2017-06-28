@@ -13,7 +13,6 @@
 #include <iostream>
 #include <string>
 
-#include "stdafx.h"
 namespace fusion = boost::fusion;
 using namespace std;
 
@@ -32,7 +31,7 @@ BOOST_FUSION_DEFINE_ASSOC_STRUCT(
 	(double, money, keys::name)
 )
 
-int _tmain(int argc, _TCHAR* argv[])
+int asdf()
 {
 	demo::employee e("amao", 18, 1000.0);
 
