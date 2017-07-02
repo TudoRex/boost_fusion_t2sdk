@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "t2sdk_fusion", "t2sdk_fusion\t2sdk_fusion.vcxproj", "{061EB385-1C98-41F9-A8E7-868DEDC84C9B}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "name_gen", "name_gen\name_gen.vcxproj", "{7329CB08-7FD2-4245-A56D-8A65ED782ADD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -15,6 +17,10 @@ Global
 		{061EB385-1C98-41F9-A8E7-868DEDC84C9B}.Debug|Win32.Build.0 = Debug|Win32
 		{061EB385-1C98-41F9-A8E7-868DEDC84C9B}.Release|Win32.ActiveCfg = Release|Win32
 		{061EB385-1C98-41F9-A8E7-868DEDC84C9B}.Release|Win32.Build.0 = Release|Win32
+		{7329CB08-7FD2-4245-A56D-8A65ED782ADD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7329CB08-7FD2-4245-A56D-8A65ED782ADD}.Debug|Win32.Build.0 = Debug|Win32
+		{7329CB08-7FD2-4245-A56D-8A65ED782ADD}.Release|Win32.ActiveCfg = Release|Win32
+		{7329CB08-7FD2-4245-A56D-8A65ED782ADD}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

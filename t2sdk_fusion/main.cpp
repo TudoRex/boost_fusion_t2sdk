@@ -1,34 +1,55 @@
-#include "stdafx.h"
-#include <iostream>
+#include <boost/lexical_cast.hpp>
 #include <string>
-#include <sstream>
-#include <fstream>
-#include <cassert>
-#include "json11.hpp"
 
-using namespace json11;
-using namespace std;
+struct stringize_functor {
+private:
+	std::string& result;
 
-void LoadJson(string& out, const char* path)
-{
-	ifstream ifs(path);
-	assert(ifs.is_open());
+public:
+	explicit stringize_functor(std::string& res)
+		: result(res)
+	{}
 
-	string linetmp;
-	stringstream ss;
-	ss.clear();
-	ss.str("");
-	while (std::getline(ifs, linetmp))
-	{
-		ss << linetmp;
+	template <class T>
+	void operator()(const T& v) const {
+		result += boost::lexical_cast<std::string>(v);
 	}
-	std::swap(out, ss.str());
-}
-int main()
-{
-	string buf;
-	LoadJson(buf, "o32.json");
+};
 
-	string err;
-	auto json = Json::parse(buf, err);
+
+#include <boost/fusion/include/for_each.hpp>
+#include <boost/fusion/adapted.hpp>
+template <class Sequence>
+std::string stringize(const Sequence& seq) {
+	std::string result;
+	boost::fusion::for_each(seq, stringize_functor(result));
+	return result;
+}
+
+namespace keys
+{
+	struct Name;
+	struct Age;
+}
+
+BOOST_FUSION_DEFINE_ASSOC_STRUCT(
+	(demo),
+	myst,
+	(std::string, name, keys::Name)
+	(int		, age, keys::Age)
+)
+
+
+#include <cassert>
+#include <boost/fusion/adapted/boost_tuple.hpp>
+#include <boost/fusion/adapted/std_pair.hpp>
+
+int main() {
+	boost::tuple<char, int, char, int> decim('-', 10, 'e', 5);
+	assert(stringize(decim) == "-10e5");
+
+	std::pair<short, std::string> value_and_type(270, "Kelvin");
+	assert(stringize(value_and_type) == "270Kelvin");
+
+
 }
