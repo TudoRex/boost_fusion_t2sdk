@@ -13,7 +13,10 @@ public:
 
 	template <class T>
 	void operator()(const T& v) const {
-		result += boost::lexical_cast<std::string>(v);
+		result += "\n*****";
+		result += typeid(T).name();
+		result += "*****\n";
+		std::cout << typeid(T).name() << std::endl;
 	}
 };
 
@@ -68,13 +71,16 @@ struct Visitor
 namespace fusion = boost::fusion;
 int main() {
 	boost::tuple<char, int, char, int> decim('-', 10, 'e', 5);
-	assert(stringize(decim) == "-10e5");
+	//assert(stringize(decim) == "-10e5");
 
 	std::pair<short, std::string> value_and_type(270, "Kelvin");
-	assert(stringize(value_and_type) == "270Kelvin");
+	//assert(stringize(value_and_type) == "270Kelvin");
 
 	demo::myst me("amao", 18);
 
-	fusion::for_each(fusion::as_map(me), Visitor());
+	std::string abc;
+	fusion::for_each(fusion::as_map(me), stringize_functor(abc));
+
+	std::cout << "FINAL_RESULT:" << abc << std::endl;
 
 }
